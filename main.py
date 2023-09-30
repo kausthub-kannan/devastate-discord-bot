@@ -1,43 +1,43 @@
 import discord
 import os
 from dotenv import load_dotenv
-from discord.ext import commands  # necessary for this task
-from code_helper import code_helper
+from bot_reply import story_generator
+from datetime import datetime
 
 load_dotenv()
+
 DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
+
 intents = discord.Intents.default()
 intents.message_content = True
-
 bot = discord.Client(intents=intents)
 
 
 @bot.event
 async def on_ready():
     guild_count = 0
-    for guild in bot.guilds:
-        # PRINT THE SERVER'S ID AND NAME.
-        print(f"- {guild.id} (name: {guild.name})")
 
-        # INCREMENTS THE GUILD COUNTER.
+    # Count number of guilds the bot is present in
+    for guild in bot.guilds:
         guild_count = guild_count + 1
 
-    # PRINTS HOW MANY GUILDS / SERVERS THE BOT IS IN.
-    print("Devastate is in " + str(guild_count) + " guild.")
+    print("The bot has started! Currenlty working in " + str(guild_count) + " guild.")
 
 
 @bot.event
 async def on_message(message):
-    print(message.content)
     msg = message.content
-    # CHECKS IF THE MESSAGE THAT WAS SENT IS EQUAL TO "HELLO".
+
     if msg.startswith("<@1157375972908212294>"):
-        # SENDS BACK A MESSAGE TO THE CHANNEL.
-        msg = msg.lower()
-        reply = code_helper(msg)
+        # Clean the content before generation
+        msg = msg.replace("<@1157375972908212294>", "")
+
+        # Send a wait message
+        await message.channel.send("Cooking your story.....")
+
+        # Perform the generation and send the message
+        reply = story_generator(msg) + "\nBOOM! Next time let's continue"
         await message.channel.send(reply)
-
-    # EXECUTES THE BOT WITH THE SPECIFIED TOKEN. TOKEN HAS BEEN REMOVED AND USED JUST AS AN EXAMPLE.
-
+        print("LOG ["+ str(datetime.now()) +"]: STATUS [200]: Message [Story generated]")
 
 bot.run(DISCORD_TOKEN)
