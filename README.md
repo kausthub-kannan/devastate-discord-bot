@@ -1,4 +1,4 @@
-<h1><img width=70px src="https://i.ibb.co/ncs9hb0/sun-pixel-art-style-475147-1235.png" alt="sun-pixel-art-style-475147-1235" border="0"> Mewer</h1>
+<h1><img width=70px src="https://i.ibb.co/jgqY0Fg/cat-graphic-design-a08d0a02-603c-4c2f-b6c3-0712f4addf8c-fhd.png" alt="mew" border="0"> Mewer</h1>
 Multi-purpose discord bot which has rich commands running LLM and ML models.  
 
 #### This bot has been created for the Epochalypse server. [Server Invite Link](https://discord.gg/46X8pnXyrb)
